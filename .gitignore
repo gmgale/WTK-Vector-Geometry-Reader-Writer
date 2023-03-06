@@ -1,0 +1,4 @@
+.DS_Store
+task.txt
+node_modules
+js/dist
