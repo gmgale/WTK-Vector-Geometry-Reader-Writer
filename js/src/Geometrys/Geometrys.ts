@@ -1,18 +1,24 @@
 export class Geometry{
-  values: any;
+  values = [];
+
   constructor(values) {
     this.values = values;
+    this.isEmpty();
     return this;
   }
   
   isEmpty(){
-    //TODO: Return true if empty
+    if(this.values.length == 0){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
 export class Point extends Geometry{
-  constructor(x, y){
-    super([x, y]);
+  constructor(...values){
+    super(values);
     return this;
   }
 }

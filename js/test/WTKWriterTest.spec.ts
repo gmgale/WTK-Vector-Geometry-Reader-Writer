@@ -11,12 +11,12 @@ describe("WKT Writer Test", () => {
 
   it("Tests Geometry POINT object into WKT-formatted String", async () => {
 
-      expect(writer.write(new Geo.Point(4, 6))).toBe("POINT (4 6)");
+      expect(writer.write(new Geo.Point([4, 6]))).toBe("POINT (4 6)");
   })
 
   it("Tests Geometry LineString object into WKT-formatted String", async () => {
 
-    expect(writer.write(new Geo.LineString(4, 6, 7, 10))).toBe("LINESTRING (4 6, 7 10)");
+    expect(writer.write(new Geo.LineString([4, 6, 7, 10]))).toBe("LINESTRING (4 6, 7 10)");
   })
 
   it("Tests Geometry Polygon object into WKT-formatted String", async () => {
@@ -42,11 +42,21 @@ describe("WKT Writer Test", () => {
   it("Tests Geometry GeometryCollection object into WKT-formatted String", async () => {
 
     expect(writer.write(new Geo.GeometryCollection([
-      new Geo.Point(4, 6),
-      new Geo.LineString(4, 6, 7, 10),
+      new Geo.Point([4, 6]),
+      new Geo.LineString([4, 6, 7, 10]),
       new Geo.MultiPolygon([[4, 6], [1, 2]], [3, 4])
     ])))
     .toBe("GEOMETRYCOLLECTION (POINT (4 6), LINESTRING (4 6, 7 10), MULTIPOLYGON (((4 6), (1 2)), (3 4)))"
-      );
+    );
+  })
+
+  it("Tests empty Geometry constructor args return correct WKT-formatted 'EMPTY' String", async() => {
+    expect(writer.write(new Geo.GeometryCollection([
+      new Geo.Point(),
+      new Geo.LineString([3,4]),
+      new Geo.MultiPolygon()
+    ])))
+    .toBe("GEOMETRYCOLLECTION (POINT EMPTY, LINESTRING (3 4), MULTIPOLYGON EMPTY)"
+    );
   })
 });

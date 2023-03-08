@@ -15,15 +15,20 @@ export class WKTWriter {
       let upperName = input.constructor.name.toUpperCase();
       let values = [...input.values];
 
+      if(input.isEmpty()){
+        output.push(upperName + ' EMPTY');
+        return output;
+      }
+
       switch(input.constructor.name){
         case 'Point':
-          output.push(upperName + ' (' + values.join(' ') + ')');
+            output.push(upperName + ' (' + values[0].join(' ') + ')');
           break;
 
         case 'LineString':
 
-          for( let i=0; i<values.length -1; i+=2){
-            result.push([`${values[i]} ${values[i+1]}`]);
+          for( let i=0; i<values[0].length -1; i+=2){
+            result.push([`${values[0][i]} ${values[0][i+1]}`]);
           }
 
           output.push(upperName + ' (' + result.join(', ') + ')');
@@ -69,6 +74,7 @@ export class WKTWriter {
           break; 
 
         case 'GeometryCollection':
+
           let outputAcc = [];
           values[0].forEach(e => {
             let wrt = new WKTWriter();
