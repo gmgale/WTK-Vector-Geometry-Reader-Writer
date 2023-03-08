@@ -1,5 +1,3 @@
-import * as Geo from "./Geometrys/Geometrys";
-
 export class WKTWriter {
     /**
      * Transforms the input Geometry object into WKT-formatted String. e.g.
@@ -37,28 +35,28 @@ export class WKTWriter {
         case 'Polygon':
 
           values.forEach(v => {
-            result.push(`(${v.join(', ')})`)
+            result.push(`(${v.join(', ')})`);
           });
 
-          output.push(upperName + ' (' + result.join(', ') + ')')
+          output.push(upperName + ' (' + result.join(', ') + ')');
           break;
 
         case 'MultiPoint':
 
           values.forEach(v => {
-            result.push(`(${v.join(', ')})`)
+            result.push(`(${v.join(', ')})`);
           });
 
-          output.push(upperName + ' (' + result.join(', ') + ')')
+          output.push(upperName + ' (' + result.join(', ') + ')');
           break;
         
         case 'MultiLineString':
 
           values.forEach(v => {
-            result.push(`(${v.join(' ')})`)
+            result.push(`(${v.join(' ')})`);
           });
 
-          output.push(upperName + ' (' + result.join(', ') + ')')
+          output.push(upperName + ' (' + result.join(', ') + ')');
           break;
 
         case 'MultiPolygon':
@@ -68,9 +66,9 @@ export class WKTWriter {
           .replaceAll(',', ' ')
           .replaceAll('] [', '), (')
           .replaceAll('[', '(')
-          .replaceAll(']', ')')
+          .replaceAll(']', ')');
 
-          output.push(upperName + ' ' + poly)
+          output.push(upperName + ' ' + poly);
           break; 
 
         case 'GeometryCollection':
@@ -78,15 +76,14 @@ export class WKTWriter {
           let outputAcc = [];
           values[0].forEach(e => {
             let wrt = new WKTWriter();
-            outputAcc.push(wrt.write(e))
+            outputAcc.push(wrt.write(e));
           })
 
           output.push(upperName + ' (' + outputAcc.join(', ') + ')');
           break;
           
         default:
-          
-          throw new Error(`Geometry ${input.constructor.name} does not exist.`)
+          throw new Error(`Geometry ${input.constructor.name} does not exist.`);
       }
 
     return output.join(', ');
