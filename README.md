@@ -1,4 +1,4 @@
-# WTK Reader/Writer
+# WTK Vector Geometry Reader/Writer
 
 ## Helper classes to convert vector geometry objects to and from WKT.  
 Read more about WKT [here](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry.).
