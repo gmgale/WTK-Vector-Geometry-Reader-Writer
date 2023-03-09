@@ -75,10 +75,10 @@ export class WKTReader {
         vals = vals.join(',').replaceAll('(', '[').replaceAll(')', ']');
         vals = JSON.parse(vals);
         output = new Geo.MultiPolygon(...vals);
+
         break;
 
       case 'GeometryCollection':
-  
         vals = values.join(' ');
         let result = [];
         let start = 1;
@@ -98,6 +98,7 @@ export class WKTReader {
         });
 
         output = new Geo.GeometryCollection(objs);
+        
         break;
 
       default:
@@ -106,5 +107,4 @@ export class WKTReader {
 
   return output;
   }
-
 }
